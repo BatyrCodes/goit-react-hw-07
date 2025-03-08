@@ -56,11 +56,13 @@ export const selectLoading = (state) => state.contacts.loading;
 export const selectError = (state) => state.contacts.error;
 
 export const selectFilteredContacts = createSelector(
-  [selectContacts, (state) => state.filter],
+  [selectContacts, (state) => state.filter.name],
   (contacts, filter) => {
     const filterText = typeof filter === "string" ? filter : "";
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filterText.toLowerCase())
+    return contacts.filter(
+      (contact) =>
+        contact.name &&
+        contact.name.toLowerCase().includes(filterText.toLowerCase())
     );
   }
 );
